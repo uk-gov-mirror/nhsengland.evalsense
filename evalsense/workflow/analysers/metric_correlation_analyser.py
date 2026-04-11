@@ -20,7 +20,7 @@ OUTPUT_FORMATTERS = {
 
 
 @dataclass
-class CorrelationResults[T: pl.DataFrame | pd.DataFrame | npt.NDArray[np.float_]]:
+class CorrelationResults[T: pl.DataFrame | pd.DataFrame | npt.NDArray[np.float64]]:
     """Class to hold correlation analysis results."""
 
     correlation_matrix: T

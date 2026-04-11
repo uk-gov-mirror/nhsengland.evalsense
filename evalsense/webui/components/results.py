@@ -77,7 +77,7 @@ def results_tab(state: gr.State):
         results_df = gr.DataFrame(
             label="Evaluation Results",
             headers=["Load a project to see results"],
-            col_count=1,
+            column_count=1,
             interactive=False,
         )
         metric_correlation = gr.Plot(label="Metric Correlation", format="png")

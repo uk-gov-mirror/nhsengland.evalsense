@@ -19,7 +19,7 @@ Instructions on how to update this Changelog are available in the `Updating the 
 - None
 
 ### Miscellaneous
-- None
+- Updated local model cleanup to be compatible with the new vLLM instance management logic in Inspect AI.
 
 ## v0.1.5
 

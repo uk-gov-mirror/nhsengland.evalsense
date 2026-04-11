@@ -58,7 +58,7 @@ class BertScoreCalculator(ScoreCalculator):
         rescale_with_baseline=False,
         baseline_path=None,
         use_fast_tokenizer=False,
-        **kwargs: dict,
+        **kwargs,
     ) -> Score:
         """
         Calculates BERTScore for the supplied model prediction and reference input.
@@ -129,7 +129,7 @@ class BertScoreCalculator(ScoreCalculator):
         rescale_with_baseline=False,
         baseline_path=None,
         use_fast_tokenizer=False,
-        **kwargs: dict,
+        **kwargs,
     ) -> Score:
         """
         Calculates BERTScore for the supplied model prediction and reference input.

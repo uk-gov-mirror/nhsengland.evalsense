@@ -69,7 +69,7 @@ class GEvalScoreCalculator(ScoreCalculator):
         input: str | None = None,
         reference: str | None = None,
         metadata: dict[str, Any] | None = None,
-        **kwargs: dict,
+        **kwargs,
     ) -> Score:
         """This method is not supported for G-Eval and will raise an error when called.
 
@@ -92,7 +92,7 @@ class GEvalScoreCalculator(ScoreCalculator):
         input: str | None = None,
         reference: str | None = None,
         metadata: dict[str, Any] | None = None,
-        **kwargs: dict,
+        **kwargs,
     ) -> Score:
         """Calculates the G-Eval score asynchronously.
 

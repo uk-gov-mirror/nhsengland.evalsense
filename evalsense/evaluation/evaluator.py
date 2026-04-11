@@ -20,7 +20,7 @@ class ScoreCalculator(Protocol):
         input: str | None = None,
         reference: str | None = None,
         metadata: dict[str, Any] | None = None,
-        **kwargs: dict,
+        **kwargs,
     ) -> Score:
         """Computes evaluation scores for the given evaluation method
 
@@ -47,7 +47,7 @@ class ScoreCalculator(Protocol):
         input: str | None = None,
         reference: str | None = None,
         metadata: dict[str, Any] | None = None,
-        **kwargs: dict,
+        **kwargs,
     ) -> Score:
         """Asynchronously computes evaluation scores for the given evaluation method
 

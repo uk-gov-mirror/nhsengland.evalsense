@@ -1,11 +1,9 @@
-import os
 from typing import Any, cast
 
 from inspect_ai import Task, eval, eval_retry, score, task
 from inspect_ai.dataset import Dataset
 from inspect_ai.log import EvalLog, read_eval_log, write_eval_log
 from inspect_ai.model import GenerateConfig, Model, get_model
-import psutil
 from tqdm.auto import tqdm
 
 from evalsense.evaluation import (
@@ -87,25 +85,25 @@ class Pipeline:
     def _cleanup_active_model(self):
         """Cleans up the active model if it exists."""
         if self._active_model is not None:
-            # Cleanup background processes to free CUDA memory
-            # Temporary workaround for Inspect + vLLM memory leaks,
-            # see https://github.com/UKGovernmentBEIS/inspect_ai/issues/1543
-            main_id = os.getpid()
-            parent = psutil.Process(main_id)
-            children = parent.children(recursive=True)
-            for child in children:
-                try:
-                    child.terminate()
-                except psutil.NoSuchProcess:
-                    pass
-            _, still_alive = psutil.wait_procs(children, timeout=5)
-            if still_alive:
-                logger.warning(
-                    "⚠️  Unable to fully clean up background processes "
-                    f"({len(still_alive)}/{len(children)} still alive). "
-                    "Unless this results in overly high resource usage, "
-                    "you can safely ignore this warning."
-                )
+            logger.info(
+                f"🧹 Cleaning up model{' ' + self._active_model_config.name if self._active_model_config else ''}."
+            )
+            self._active_model.api.close()
+            if hasattr(self._active_model.api, "_server_resolved"):
+                # FIXME: Temporary Inspect AI fix, as Inspect does not re-resolve the server after the provider is closed
+                self._active_model.api._server_resolved = False  # type: ignore
+            if hasattr(self._active_model.api, "_server") and hasattr(
+                self._active_model.api._server,  # type: ignore
+                "base_url",
+            ):
+                # FIXME: Temporary Inspect AI fix, as Inspect does not reset the base_url after the provider is closed
+                new_base_url = None
+                if (
+                    self._active_model_config
+                    and "base_url" in self._active_model_config.model_args
+                ):
+                    new_base_url = self._active_model_config.model_args["base_url"]
+                self._active_model.api._server.base_url = new_base_url  # type: ignore
 
             self._active_model_config = None
             self._active_model = None

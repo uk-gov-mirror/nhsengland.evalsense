@@ -31,7 +31,7 @@ class BleuPrecisionScoreCalculator(ScoreCalculator):
         input: str | None = None,
         reference: str | None = None,
         metadata: dict[str, Any] | None = None,
-        **kwargs: dict,
+        **kwargs,
     ) -> Score:
         """
         Calculates BLEU precision scores for the supplied model prediction and reference input.
@@ -74,7 +74,7 @@ class BleuPrecisionScoreCalculator(ScoreCalculator):
         input: str | None = None,
         reference: str | None = None,
         metadata: dict[str, Any] | None = None,
-        **kwargs: dict,
+        **kwargs,
     ) -> Score:
         """
         Calculates BLEU precision scores for the supplied model prediction and reference input.

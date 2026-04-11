@@ -84,7 +84,7 @@ def data_tab(state: gr.State):
             sample_df = gr.Dataframe(
                 label="Sample Data",
                 headers=["Load a dataset to see sample data"],
-                col_count=1,
+                column_count=1,
                 interactive=False,
             )
 
