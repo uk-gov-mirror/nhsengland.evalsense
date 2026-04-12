@@ -1,6 +1,6 @@
 [project]
 name = "evalsense"
-version = "0.1.5"
+version = "0.1.6"
 description = "Tools for evaluating large language models."
 readme = "README.md"
 authors = [
